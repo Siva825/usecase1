@@ -1,0 +1,14 @@
+- hosts: all
+  become: true
+  tasks:
+  - name: pulling nginx image from gar
+    docker_image:
+      name: us-south1-docker.pkg.dev/siva-477505/dockerimg/flask:v1
+      source: pull
+  - name: running nginx container
+    docker_container:
+      name: flaskapp
+      image: us-south1-docker.pkg.dev/siva-477505/dockerimg/flask:v1
+      state: started
+      ports:
+        - "85:5000"
